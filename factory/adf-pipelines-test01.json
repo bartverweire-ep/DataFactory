@@ -1,0 +1,9 @@
+{
+	"name": "adf-pipelines-test01",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "8d53c12d-e2bf-4a9b-86b3-b4e685ffe4e1",
+		"tenantId": "4f604bd1-00fb-4aae-b3a1-79091a246031"
+	}
+}
