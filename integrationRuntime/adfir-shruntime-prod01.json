@@ -1,0 +1,7 @@
+{
+	"name": "adfir-shruntime-prod01",
+	"properties": {
+		"type": "SelfHosted",
+		"description": "Self-hosted integration runtime for prod"
+	}
+}
