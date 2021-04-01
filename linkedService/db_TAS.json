@@ -1,0 +1,19 @@
+{
+	"name": "db_TAS",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Sybase",
+		"typeProperties": {
+			"server": "epbpwe-tas01.corp.euroports.com",
+			"database": "CTOPDATAEPEPDB",
+			"authenticationType": "Basic",
+			"username": "TAS",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI4OGFmZmRjYS0wYmM1LTQ4YjgtOGZiYy1mMmE0ZTZkZTdlNzgiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "adfir-shruntime-prod01",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
