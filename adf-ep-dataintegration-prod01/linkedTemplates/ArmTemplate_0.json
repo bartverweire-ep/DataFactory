@@ -1,0 +1,86 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adf-ep-dataintegration-prod01"
+		},
+		"db_KVP_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'db_KVP'"
+		},
+		"db_TAS_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'db_TAS'"
+		},
+		"db_TAS_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "epbpwe-tas01.corp.euroports.com"
+		},
+		"db_TAS_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "CTOPDATAEPEPDB"
+		},
+		"db_TAS_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "TAS"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/db_KVP')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Oracle",
+				"typeProperties": {
+					"connectionString": "[parameters('db_KVP_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adfir-shruntime-prod01')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"description": "Self-hosted integration runtime for prod",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/db_TAS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Sybase",
+				"typeProperties": {
+					"server": "[parameters('db_TAS_properties_typeProperties_server')]",
+					"database": "[parameters('db_TAS_properties_typeProperties_database')]",
+					"authenticationType": "Basic",
+					"username": "[parameters('db_TAS_properties_typeProperties_username')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('db_TAS_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "adfir-shruntime-prod01",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/adfir-shruntime-prod01')]"
+			]
+		}
+	]
+}
