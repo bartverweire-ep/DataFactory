@@ -1,0 +1,15 @@
+{
+	"name": "ds_TRB_DOSSIER",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "db_TAS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SybaseTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "\"dba\".\"TRB_DOSSIER\""
+		}
+	}
+}
